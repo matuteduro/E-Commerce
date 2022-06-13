@@ -11,6 +11,10 @@ const productSchema = new mongoose.Schema(
     price:{
         type:Number, required: true,
     },
+    rating: {
+        type: Number,
+        default: 0,
+    },
     images:[
         {public_id:{
             type:String, required: true,
@@ -28,6 +32,26 @@ const productSchema = new mongoose.Schema(
         type:Number,
         default: 1
     },
+    numOfReviews: {
+        type: Number,
+        default: 0,
+    },
+    reviews: [
+        {
+          name: {
+            type: String,
+            required: true,
+          },
+          rating: {
+            type: Number,
+            required: true,
+          },
+          comment: {
+            type: String,
+            required: true,
+          },
+        },
+      ],
 
     createdAt:{
         type:Date,
