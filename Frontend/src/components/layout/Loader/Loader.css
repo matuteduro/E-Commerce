@@ -1,0 +1,10 @@
+.loading{
+    width: 100vw;
+    height: 100vh;
+    background-color: white;
+}
+
+.loading > div {
+    width: 10vmax;
+    background-color: tomato;
+}
