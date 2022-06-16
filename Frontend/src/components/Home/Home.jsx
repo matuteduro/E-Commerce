@@ -5,28 +5,26 @@ import { CgMouse } from "react-icons/cg";
 import MetaData from '../layout/MetaData';
 import {getProduct} from "../../actions/productAction";
 import {useSelector, useDispatch} from "react-redux";
+import Loader from "../layout/Loader/Loader"
+import {useAlert} from "@blaumaus/react-alert"
 
-
-
-const product = {
-  name: "Nike hoodie",
-  images: [{url: "https://www.tradeinn.com/f/13719/137194767/nike-sportswear-club-hoodie.jpg"}],
-  price: "$11000",
-  _id: "nikehoodie",
-}
 
 const Home = () => {
+  const alert= useAlert()
   const dispatch = useDispatch();
   const {loading, error, products, productsCount} = useSelector(
     (state) => state.products);
   
   useEffect(() => {
+    if(error){
+      return alert.error(error)
+    }
     dispatch(getProduct());
-  }, [dispatch]);
+  }, [dispatch, error, alert]);
 
   return (
   <Fragment>
-    {loading ? "loading": <Fragment>
+    {loading ? (<Loader/>): (<Fragment>
     <MetaData title="E-Commerce"/>
       <div className="banner">
             <p>JUST DO IT</p>
@@ -44,7 +42,7 @@ const Home = () => {
           )}
 
         </div> 
-   </Fragment>}
+   </Fragment>)}
   </Fragment>
   )
 };
