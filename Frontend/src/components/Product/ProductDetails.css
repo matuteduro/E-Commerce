@@ -1,0 +1,7 @@
+.ProductDetails{
+    background-color: rgb(255,255,255);
+    width: 100vw;
+    max-width: 100%;
+    padding: 6vmax;
+    box-sizing: border-box;
+}
