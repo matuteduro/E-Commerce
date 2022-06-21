@@ -6,7 +6,7 @@ import { productDetailsReducer, productReducer } from "./reducers/productReducer
 
 const reducer = combineReducers({
     products:productReducer,
-    productDetails:productDetailsReducer
+    productDetails:productDetailsReducer,
 });
 
 let initialState={};
