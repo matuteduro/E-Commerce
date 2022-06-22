@@ -84,14 +84,14 @@ return (
 
         <h3 className='reviewsHeading'>REVIEWS</h3>
 
-        {product?.reviews && product?.review[0]?(
+       {/*{product?.reviews && product?.review[0]?(
             <div className="reviews">
                 {product?.reviews && 
                 product?.reviews.map((review) => <ReviewCard review={review}/>)}
             </div>
         ) : (
             <p className='noReviews'>No Reviews Yet</p>
-        ) }
+        ) }*/}
     </Fragment>
 
 );
