@@ -2,26 +2,32 @@ import React, { Fragment, useEffect } from 'react';
 import Carousel from "react-material-ui-carousel";
 import "./ProductDetails.css";
 import {useSelector, useDispatch} from "react-redux";
-import { getProductDetails } from '../../actions/productAction';
+import { clearErrors, getProductDetails } from '../../actions/productAction';
 import { useParams } from 'react-router-dom';
 import ReactStars from "react-rating-stars-component";
 import ReviewCard from "./ReviewCard";
+import Loader from "../layout/Loader/Loader"
+import {useAlert} from "@blaumaus/react-alert"
 
 
 
 const ProductDetails = ({}) => {
     const {id} = useParams();
     const dispatch = useDispatch();
+    const alert = useAlert
 
     const { product, loading, error} = useSelector(
         (state) => state.productDetails
         );
 
         useEffect(() =>{
-    
+        if(error){
+            alert.error(error);
+            dispatch(clearErrors());
+        }
             dispatch(getProductDetails(id));
             },
-            [dispatch, id]
+            [dispatch, id, error, alert]
             );  
 
     const options = {
@@ -36,6 +42,7 @@ const ProductDetails = ({}) => {
     
 return (
     <Fragment>
+        {loading? <Loader /> : (<Fragment>
         <div className="ProductDetails">
             <div>
             
@@ -92,6 +99,7 @@ return (
         ) : (
             <p className='noReviews'>No Reviews Yet</p>
         ) }*/}
+    </Fragment>)}
     </Fragment>
 
 );
