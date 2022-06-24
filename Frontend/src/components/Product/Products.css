@@ -70,3 +70,12 @@
   .pageLinkActive {
     color: rgb(255, 255, 255);
   }
+
+
+.filterBox{
+    width: 10vmax;
+    position: absolute;
+    top: 10vmax;
+    left: 4vmax;
+
+}
