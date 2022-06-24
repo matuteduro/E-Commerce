@@ -25,6 +25,7 @@ const Products = ({}) => {
     }
 
     const priceHandler = (event, newPrice) => {
+        console.log(newPrice)
         setPrice(newPrice);
     }
 
@@ -45,10 +46,10 @@ useEffect(() => {
    <div className="filterBox">
     <Typography>Price</Typography>
     <Slider 
+        getAriaLabel={() => 'Temperature range'}
         value={price}
         onChange={priceHandler}
         valueLabelDisplay="auto"
-        aria-labelledby="range-slider"
         min={0}
         max={25000}
     />
