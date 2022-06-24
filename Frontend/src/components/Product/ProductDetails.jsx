@@ -21,7 +21,7 @@ const ProductDetails = ({}) => {
         );
 
         useEffect(() =>{
-        if(error){
+        if(error){ 
             alert.error(error);
             dispatch(clearErrors());
         }
