@@ -1,6 +1,7 @@
 import React from 'react'
 import {ReactNavbar} from "overlay-navbar"
 import logo from "../../../images/logo.png"
+import { CgMouse } from "react-icons/cg";
 
 const options={
   burgerColor:"green", 
@@ -29,13 +30,14 @@ const options={
     link4ColorHover:"#eb4034",
     link1Margin:"1vmax",
     profileIconColor:"rgba(35, 35, 35, 0.8)",
-    searchIconColor:"rgba(35, 35, 35, 0.8)",
+    searchIconColor:"rgb(238, 54, 54)",
     cartIconColor:"rgba(35, 35, 35, 0.8)",
     profileIconColorHover:"#eb4034",
     searchIconColorHover:"#eb4034",
     cartIconColorHover:"#eb4034",
     cartIconMargin:"1vmax",
-
+    SearchIconElement:{CgMouse},
+    
 
 }
 

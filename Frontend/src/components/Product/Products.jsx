@@ -10,7 +10,7 @@ import {Slider} from "@mui/material";
 import {Typography} from "@mui/material";
 
 const categories = [
-    "Nike",
+    "nikee",
     "Adidas",
     "Puma",
     "Remeras",
@@ -64,7 +64,7 @@ let count = filteredProductsCount;
         max={25000}
     />
 
-<Typography>Categories</Typography>
+    <Typography>Categories</Typography>
         <ul className="categoryBox">
             {categories.map((category) => (
                 <li 
@@ -76,7 +76,6 @@ let count = filteredProductsCount;
                 </li>
             ))}
         </ul>
-
 
    </div>
     {resultPerPage < count && (
