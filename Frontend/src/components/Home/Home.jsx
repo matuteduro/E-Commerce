@@ -5,8 +5,8 @@ import { CgMouse } from "react-icons/cg";
 import MetaData from '../layout/MetaData';
 import {clearErrors, getProduct} from "../../actions/productAction";
 import {useSelector, useDispatch} from "react-redux";
-import Loader from "../layout/Loader/Loader"
-import {useAlert} from "@blaumaus/react-alert"
+import Loader from "../layout/Loader/Loader";
+import {useAlert} from "@blaumaus/react-alert";
 
 
 const Home = () => {
@@ -25,7 +25,10 @@ const Home = () => {
 
   return (
   <Fragment>
-    {loading ? (<Loader/>): (<Fragment>
+    {loading ? 
+    (<Loader/>
+    ): (
+    <Fragment>
     <MetaData title="E-Commerce"/>
       <div className="banner">
             <p>JUST DO IT</p>

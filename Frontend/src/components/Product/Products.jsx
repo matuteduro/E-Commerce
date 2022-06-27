@@ -8,6 +8,10 @@ import { useParams } from "react-router-dom";
 import Pagination from "react-js-pagination";
 import {Slider} from "@mui/material";
 import {Typography} from "@mui/material";
+import {useAlert} from "@blaumaus/react-alert"
+import MetaData from '../layout/MetaData';
+
+
 
 const categories = [
     "nikee",
@@ -19,6 +23,8 @@ const categories = [
 
 const Products = ({}) => {
     const dispatch = useDispatch()
+
+    const alert = useAlert();
 
     const [currentPage, setCurrentPage] = useState(1);
     const [price, setPrice] = useState([1, 25000]);
@@ -38,13 +44,20 @@ const Products = ({}) => {
     }
 
 useEffect(() => {
+    if(error){
+        alert.error(error);
+        dispatch(clearErrors());
+    }
     dispatch(getProduct(keyword, currentPage, price, category))
-}, [dispatch, keyword,currentPage, price,category]);
+}, [dispatch, keyword,currentPage, price,category,alert,error]);
 
 let count = filteredProductsCount;
 
   return <Fragment>
-    {loading?<Loader /> : <Fragment>
+    {loading? (
+    <Loader /> 
+    ): <Fragment>
+         <MetaData title="Products"/>
         <h2 className="productsHeading">Products</h2>
 
     <div className="products">
