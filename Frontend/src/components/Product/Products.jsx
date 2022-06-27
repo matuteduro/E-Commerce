@@ -9,13 +9,21 @@ import Pagination from "react-js-pagination";
 import {Slider} from "@mui/material";
 import {Typography} from "@mui/material";
 
-
+const categories = [
+    "Nike",
+    "Adidas",
+    "Puma",
+    "Remeras",
+    "Zapatillas",
+];
 
 const Products = ({}) => {
     const dispatch = useDispatch()
 
     const [currentPage, setCurrentPage] = useState(1);
     const [price, setPrice] = useState([1, 25000]);
+    const [category, setCategory] = useState("");
+
     const {products,loading,error,productsCount, resultPerPage,filteredProductsCount} = useSelector((state) => state.products)
 
     const {keyword} = useParams();
@@ -30,8 +38,8 @@ const Products = ({}) => {
     }
 
 useEffect(() => {
-    dispatch(getProduct(keyword, currentPage, price))
-}, [dispatch, keyword,currentPage, price]);
+    dispatch(getProduct(keyword, currentPage, price, category))
+}, [dispatch, keyword,currentPage, price,category]);
 
 let count = filteredProductsCount;
 
@@ -55,6 +63,21 @@ let count = filteredProductsCount;
         min={0}
         max={25000}
     />
+
+<Typography>Categories</Typography>
+        <ul className="categoryBox">
+            {categories.map((category) => (
+                <li 
+                className="category-link"
+                key={category}
+                onClick={() => setCategory(category)}
+                >
+                {category}
+                </li>
+            ))}
+        </ul>
+
+
    </div>
     {resultPerPage < count && (
         <div className="paginationBox">
