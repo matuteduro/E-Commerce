@@ -28,6 +28,7 @@ const options={
     link3ColorHover:"#eb4034",
     link4ColorHover:"#eb4034",
     link1Margin:"1vmax",
+    profileIconUrl: "/login",
     profileIconColor:"rgba(35, 35, 35, 0.8)",
     searchIconColor:"rgb(238, 54, 54)",
     cartIconColor:"rgba(35, 35, 35, 0.8)",
