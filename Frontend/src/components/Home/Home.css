@@ -15,7 +15,7 @@
 .banner > h1 {
   margin: 5vmax;
 
-  font: 600 2.5vmax "Roboto";
+  font: 600 2.5vmax;
 }
 
 .banner > p {
@@ -31,7 +31,7 @@
   padding: 1vmax;
   transition: all 0.5s;
   width: 9vmax;
-  font: 500 1vmax "Roboto";
+  font: 500 1vmax ;
 }
 .banner > a > button:hover {
   background-color: rgba(255, 255, 255, 0);
@@ -52,7 +52,6 @@
 
 .homeHeading {
   text-align: center;
-  font-family: Roboto;
   font-size: 1.4vmax;
   border-bottom: 1px solid rgba(21, 21, 21, 0.5);
   width: 20vmax;
@@ -94,11 +93,10 @@
 
 .productCard > div > span {
   margin: 0.5vmax;
-  font: 300 0.7vmax "Roboto";
+  font: 300 0.7vmax;
 }
 
 .productCard > p {
-  font-family: "Roboto";
   font-size: 1.2vmax;
   margin: 1vmax 0.5vmax;
   margin-bottom: 0;
@@ -132,7 +130,7 @@
 
   .productCard > div > span {
     margin: 0 0.5vmax;
-    font: 300 1vmax "Roboto";
+    font: 300 1vmax;
   }
 }
 

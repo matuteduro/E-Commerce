@@ -4,7 +4,7 @@
     border-bottom: 1px solid rgba(0, 0, 0, 0.171);
     padding: 2vmax;
     color: rgba(0, 0, 0, 0.678);
-    font: 500 1.5vmax "Roboto";
+    font: 500 1.5vmax;
     text-align: center;
 
 }
@@ -48,7 +48,7 @@
   }
   
   .page-link {
-    font: 300 0.7vmax "Roboto";
+    font: 300 0.7vmax;
     color: rgb(236, 2, 2);
     transition: all 0.3s;
     text-decoration: none;
@@ -78,4 +78,19 @@
     top: 10vmax;
     left: 4vmax;
 
+}
+
+@media screen and (max-width: 600px) {
+  .filterBox {
+    width: 20vmax;
+    position: static;
+    margin: auto;
+  }
+
+  .page-link {
+    font: 300 1.7vmax ;
+  }
+  .category-link {
+    font: 400 1.8vmax ;
+  }
 }

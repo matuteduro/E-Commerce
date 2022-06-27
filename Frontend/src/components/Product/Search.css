@@ -32,7 +32,7 @@
     border: none;
     padding: 1vmax;
     width: 10%;
-    font: 300 1.1vmax "Roboto";
+    font: 300 1.1vmax;
     cursor: Pointer;
     color: White;
     transition: all 0.5s;

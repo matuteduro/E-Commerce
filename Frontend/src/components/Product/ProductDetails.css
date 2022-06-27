@@ -30,12 +30,12 @@
 
 .detailsBlock-1 > h2{
     color: rgb(54, 54, 54);
-    font: 600 1.6vmax "Roboto";
+    font: 600 1.6vmax;
 }
 
 .detailsBlock-1 > p{
     color: rgb(54, 54, 54, 0.582);
-    font: 200 0.6vmax "Roboto";
+    font: 200 0.6vmax;
 }
 
 .detailsBlock-2{
@@ -80,7 +80,7 @@ color: rgba(17, 17, 17, 0.795);
   width: 1vmax;
   text-align: center;
   outline: none;
-  font: 400 0.8vmax "Roboto";
+  font: 400 0.8vmax ;
   color: rgba(0, 0, 0, 0.74);
 }
 
@@ -90,7 +90,7 @@ color: rgba(17, 17, 17, 0.795);
   color: white;
   transition: all 0.5s;
   background-color: tomato;
-  font: 500 0.7vmax "Roboto";
+  font: 500 0.7vmax;
   border-radius: 20px;
   padding: 0.5vmax 2vmax;
   margin: 1vmax;
@@ -106,7 +106,7 @@ color: rgba(17, 17, 17, 0.795);
   border-bottom: 1px solid rgba(0, 0, 0, 0.205);
   padding: 1vmax 0;
   color: rgba(0, 0, 0, 0.651);
-  font: 400 1vmax "Roboto";
+  font: 400 1vmax;
   margin: 1vmax 0;
 }
 
@@ -121,7 +121,7 @@ color: rgba(17, 17, 17, 0.795);
 }
 
 .submitReview{
-    font: 500 1.7vmax "Roboto";
+    font: 500 1.7vmax;
     padding: 1.5vmax;
     width: 20vmax;
     margin: 3vmax 0;

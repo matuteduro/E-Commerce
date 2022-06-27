@@ -11,7 +11,7 @@ CLEAR_ERRORS,
 } from "../constants/productConstants"
 
 //Get all products
-export const getProduct = (keyword="", currentPage = 1, price = [0, 25000])=> async(dispatch)=>{
+export const getProduct = (keyword="", currentPage = 1, price = [1, 25000])=> async(dispatch)=>{
     try{
         dispatch({ type: ALL_PRODUCT_REQUEST });
 
