@@ -2,13 +2,25 @@ import React, { Fragment, useRef, useState } from 'react';
 import "./LoginSignUp.css";
 import Loader from '../layout/Loader/Loader';
 import { MdMailOutline, MdFace } from 'react-icons/md';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {BiLockOpenAlt} from "react-icons/bi"
+
+import { useDispatch, useSelector } from 'react-redux';
+import {clearErrors, login, register} from "../../actions/userAction";
+import { useAlert} from "@blaumaus/react-alert"
+import { useEffect } from 'react';
 
 
 
 const LoginSignUp = () => {
     
+    const dispatch = useDispatch();
+    const alert = useAlert()
+
+    const navigate = useNavigate();
+
+    const {error, loading, isAuthenticated} = useSelector(state => state.user)
+
     const loginTab = useRef(null);
     const registerTab = useRef(null);
     const switcherTab = useRef(null);
@@ -28,8 +40,10 @@ const LoginSignUp = () => {
     const [avatarPreview, setAvatarPreview] = useState("/Profile.png")
 
 
-    const loginSubmit = () => {
+    const loginSubmit = (e) => {
+        e.preventDefault();
         console.log("Login Form Submited")
+        dispatch(login(loginEmail,loginPassword))
     }
 
     const registerSubmit = (e) => {
@@ -41,7 +55,7 @@ const LoginSignUp = () => {
         myForm.set("email", email);
         myForm.set("password", password);
         myForm.set("avatar", avatar);
-        console.log("Sign Up Form Submited")
+        dispatch(register(myForm))
     };
 
     const registerDataChange = (e) => {
@@ -60,6 +74,17 @@ const LoginSignUp = () => {
         }
 
     };
+
+    useEffect(() => {
+        if (error){
+            alert.error(error);
+            dispatch(clearErrors());
+        }
+
+        if(isAuthenticated){
+            navigate("/account")
+        }
+    }, [dispatch,error,alert, navigate, isAuthenticated])
 
     const switchTabs = (e, tab) => {
         if (tab === "login") {
@@ -87,6 +112,8 @@ const LoginSignUp = () => {
 
   return (
     <Fragment>
+        {loading?<Loader/> : 
+        <Fragment>
         <div className="LoginSignUpContainer">
             <div className="LoginSignUpBox">
                 <div>
@@ -139,6 +166,8 @@ const LoginSignUp = () => {
         </div>
 
 
+    </Fragment>
+        }
     </Fragment>
 
 
