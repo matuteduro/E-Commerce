@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@blaumaus/react-alert": "^7.0.5",
+    "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.5",
     "@reduxjs/toolkit": "^1.8.2",
     "@testing-library/jest-dom": "^5.16.4",

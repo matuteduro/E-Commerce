@@ -9,9 +9,14 @@ import ProductDetails from "./components/Product/ProductDetails"
 import Products from "./components/Product/Products"
 import Search from "./components/Product/Search"
 import LoginSignUp from './components/User/LoginSignUp';
-
+import store from "./store"
+import { loadUser } from './actions/userAction';
+import UserOptions from "./components/layout/Header/UserOptions"
+import { useSelector } from 'react-redux';
 
 function App() {
+
+  const {isAuthenticated, user} = useSelector(state=>state.user)
   React.useEffect(() => {
 
     WebFont.load({
@@ -19,11 +24,14 @@ function App() {
         families: [ "Droid Sans", "Chilanka"],
       },
     });
+
+    store.dispatch(loadUser())
   }, []);
   
   return (
     <Router>
       <Header/>
+      {isAuthenticated && <UserOptions user={user} />}
       <Routes>
         <Route exact path="/" element={<Home/>}/>
         <Route exact path="/product/:id" element={<ProductDetails/>}/>

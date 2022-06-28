@@ -1,0 +1,16 @@
+.speedDial {
+    position: fixed;
+    right: 3vmax;
+    top: 3vmax;
+    transition: transform .8s;
+  }
+.speedDial:hover{
+    transform: scale(1.5);
+    top: 4vmax;
+}
+  
+  .speedDialIcon {
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+  }
