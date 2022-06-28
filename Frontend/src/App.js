@@ -1,6 +1,6 @@
 import './App.css';
 import Header from "./components/layout/Header/Header"
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom'
+import {BrowserRouter, BrowserRouter as Router, Route, Routes} from 'react-router-dom'
 import React from "react";
 import WebFont from 'webfontloader';
 import Footer from "./components/layout/Footer/Footer"
@@ -14,6 +14,7 @@ import { loadUser } from './actions/userAction';
 import UserOptions from "./components/layout/Header/UserOptions"
 import { useSelector } from 'react-redux';
 import Profile from "./components/User/Profile"
+import ProtectedRoute from './components/Route/ProtectedRoute';
 
 function App() {
 
@@ -34,16 +35,14 @@ function App() {
       <Header/>
       {isAuthenticated && <UserOptions user={user} />}
       <Routes>
-        <Route exact path="/" element={<Home/>}/>
-        <Route exact path="/product/:id" element={<ProductDetails/>}/>
-        <Route exact path="/products" element={<Products/>}/>
+        <Route path="/" element={<Home/>}/>
+        <Route path="/product/:id" element={<ProductDetails/>}/>
+        <Route path="/products" element={<Products/>}/>
         <Route path="/products/:keyword" element={<Products/>}/>
-        <Route exact path="/search" element={<Search/>}/>
-        <Route exact path="/account" element={<Profile/>}/>
-        <Route exact path="/login" element={<LoginSignUp/>}/>
-        
-
-        
+        <Route path="/search" element={<Search/>}/>
+        <Route element={<ProtectedRoute/>}/>
+          <Route path="/account" element={<Profile/>}/>
+        <Route path="/login" element={<LoginSignUp/>}/>
       </Routes>
     <Footer/>
     </Router>
