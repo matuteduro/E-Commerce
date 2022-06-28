@@ -2,11 +2,11 @@
     position: fixed;
     right: 3vmax;
     top: 3vmax;
-    transition: transform .8s;
+    transition: 0.2s;
   }
 .speedDial:hover{
-    transform: scale(1.5);
-    top: 4vmax;
+    transform: scale(1.45); 
+    top: 3.25vmax;   
 }
   
   .speedDialIcon {
