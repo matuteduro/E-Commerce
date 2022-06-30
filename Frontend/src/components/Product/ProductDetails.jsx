@@ -44,7 +44,7 @@ const ProductDetails = ({}) => {
 return (
     <Fragment>
         {loading? <Loader /> : (<Fragment>
-        <MetaData title={`${product.name}`}/>
+        <MetaData title={`${product?.name}`}/>
      
         <div className="ProductDetails">
             <div>
@@ -73,7 +73,7 @@ return (
                 <div className="detailsBlock-3-1">
                     <div className="detailsBlock-3-1-1">
                     <button>-</button>  
-                    <input value="1" type="number" /> 
+                    <input type="number" /> 
                     <button>+</button>
                     </div>{" "}
                     <button>Add to Cart</button>

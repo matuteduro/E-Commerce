@@ -3,7 +3,7 @@ import "./UpdatePassword.css";
 import Loader from '../layout/Loader/Loader';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearErrors, updatePassword, loadUser } from "../../actions/userAction";
+import { clearErrors, updatePassword} from "../../actions/userAction";
 import { useAlert } from "@blaumaus/react-alert"
 import { UPDATE_PASSWORD_RESET } from '../../constants/userConstants';
 import MetaData from '../layout/MetaData';
@@ -58,7 +58,7 @@ const UpdatePassword = () => {
       <div className="updatePasswordContainer">
         <div className="updatePasswordBox">
           <h2 className='updatePasswordHeading'>Update Profile</h2>
-          <form className="updatePasswordForm" encType="multipart/form-data" onSubmit={updatePasswordSubmit}>   
+          <form className="updatePasswordForm" onSubmit={updatePasswordSubmit}>   
           <div className="loginPassword">
                 <BiLockOpenAlt/>
                 <input type="password" placeholder="Old Password" required value={oldPassword} onChange={(e) => setOldPassword(e.target.value)}    />

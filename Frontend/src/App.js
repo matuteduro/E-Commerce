@@ -1,6 +1,6 @@
 import './App.css';
 import Header from "./components/layout/Header/Header";
-import {BrowserRouter, BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
 import React from "react";
 import WebFont from 'webfontloader';
 import Footer from "./components/layout/Footer/Footer";
@@ -17,6 +17,8 @@ import Profile from "./components/User/Profile";
 import ProtectedRoute from './components/Route/ProtectedRoute';
 import UpdateProfile from "./components/User/UpdateProfile";
 import UpdatePassword from "./components/User/UpdatePassword";
+import ForgotPassword from './components/User/ForgotPassword';
+import ResetPassword from "./components/User/ResetPassword";
 
 function App() {
 
@@ -48,6 +50,8 @@ function App() {
          <Route path="/me/update" element={<UpdateProfile/>}/>
         <Route element={<ProtectedRoute/>}/>
          <Route path="/password/update" element={<UpdatePassword/>}/>
+        <Route path="/password/forgot" element={<ForgotPassword/>}/> 
+        <Route path="/password/reset/:token" element={<ResetPassword/>}/> 
         <Route path="/login" element={<LoginSignUp/>}/>
       </Routes>
     <Footer/>
