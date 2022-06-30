@@ -1,7 +1,6 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import "./UpdatePassword.css";
 import Loader from '../layout/Loader/Loader';
-import { MdMailOutline, MdFace } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearErrors, updatePassword, loadUser } from "../../actions/userAction";
@@ -12,7 +11,7 @@ import { BiLockOpenAlt } from 'react-icons/bi';
 
 const UpdatePassword = () => {
 
-    const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const alert = useAlert();
 
@@ -24,38 +23,21 @@ const UpdatePassword = () => {
 
 
 
-  const updateProfileSubmit = (e) => {
+  const updatePasswordSubmit = (e) => {
     e.preventDefault();
 
     const myForm = new FormData();
 
-    myForm.set("name", name);
-    myForm.set("email", email);
-    myForm.set("avatar", avatar);
-    dispatch(updateProfile(myForm))
-  };
+    myForm.set("oldPassword", oldPassword);
+    myForm.set("newPassword", newPassword);
+    myForm.set("confirmPassword", confirmPassword);
 
-  const updateProfileDataChange = (e) => {
-    const reader = new FileReader();
-
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setAvatarPreview(reader.result)
-        setAvatar(reader.result);
-      }
-    }
-    reader.readAsDataURL(e.target.files[0]);
+    dispatch(updatePassword(myForm))
   };
 
 
   useEffect(() => {
-    if (user) {
-      setName(user.name);
-      setEmail(user.email);
-      setAvatarPreview(user.avatar.url);
-
-
-    }
+   
     if (error) {
       alert.error(error);
       dispatch(clearErrors());
@@ -63,33 +45,33 @@ const UpdatePassword = () => {
 
     if (isUpdated) {
       alert.success("Profile Updated Successfully");
-      dispatch(loadUser());
       navigate("/account");
       dispatch({
-        type: UPDATE_PROFILE_RESET,
+        type: UPDATE_PASSWORD_RESET,
       })
     }
-  }, [dispatch, error, alert, navigate, user, isUpdated]);
+  }, [dispatch, error, alert, navigate, isUpdated]);
   return (
     <Fragment>
       {loading?<Loader /> : <Fragment>
-      <MetaData title="Update Profile" />
-      <div className="updateProfileContainer">
-        <div className="updateProfileBox">
-          <h2 className='updateProfileHeading'>Update Profile</h2>
-          <form className="updateProfileForm" encType="multipart/form-data" onSubmit={updateProfileSubmit}>   
+      <MetaData title="Change Password" />
+      <div className="updatePasswordContainer">
+        <div className="updatePasswordBox">
+          <h2 className='updatePasswordHeading'>Update Profile</h2>
+          <form className="updatePasswordForm" encType="multipart/form-data" onSubmit={updatePasswordSubmit}>   
           <div className="loginPassword">
                 <BiLockOpenAlt/>
-                <input type="password" placeholder="Password" required value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)}    />
+                <input type="password" placeholder="Old Password" required value={oldPassword} onChange={(e) => setOldPassword(e.target.value)}    />
+                </div>
           <div className="loginPassword">
                 <BiLockOpenAlt/>
-                <input type="password" placeholder="Password" required value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)}    />
+                <input type="password" placeholder="New Password" required value={newPassword} onChange={(e) => setNewPassword(e.target.value)}    />
                </div>
           <div className="loginPassword">
                 <BiLockOpenAlt/>
-                <input type="password" placeholder="Password" required value={loginPassword} onChange={(e) => setLoginPassword(e.target.value)}    />
+                <input type="password" placeholder="Confirm Password" required value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)}    />
                </div>
-            <input type="submit" value="Update" className="updateProfileBtn" />
+            <input type="submit" value="Change" className="updatePasswordBtn" />
 
           </form>
         </div>
