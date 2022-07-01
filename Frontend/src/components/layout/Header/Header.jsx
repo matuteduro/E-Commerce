@@ -35,7 +35,11 @@ const options={
     profileIconColorHover:"#eb4034",
     searchIconColorHover:"#eb4034",
     cartIconColorHover:"#eb4034",
-    cartIconMargin:"1vmax",  
+    cartIconMargin:"1vmax",
+    link1Transition: "0.1",
+    searchIconTransition: "0.2",
+    cartIconTransition: "0.2",
+    profileIconTransition: "0.2",
 
 }
 
