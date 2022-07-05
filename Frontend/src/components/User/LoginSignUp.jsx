@@ -74,6 +74,7 @@ const LoginSignUp = () => {
         }
 
     };
+    
 
     useEffect(() => {
         if (error){
