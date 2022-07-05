@@ -21,6 +21,7 @@ import ForgotPassword from './components/User/ForgotPassword';
 import ResetPassword from "./components/User/ResetPassword";
 import Cart from "./components/Cart/Cart"
 import Shipping from "./components/Cart/Shipping.jsx"
+import ConfirmOrder from "./components/Cart/ConfirmOrder"
 
 function App() {
 
@@ -58,6 +59,8 @@ function App() {
         <Route path="/cart" element={<Cart/>}/>
         <Route element={<ProtectedRoute/>}/>
          <Route path="/shipping" element={<Shipping/>}/>
+        <Route element={<ProtectedRoute/>}/>
+         <Route path="/order/confirm" element={<ConfirmOrder/>}/>
       </Routes>
     <Footer/>
     </Router>
