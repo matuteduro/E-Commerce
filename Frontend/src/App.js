@@ -1,7 +1,7 @@
 import './App.css';
 import Header from "./components/layout/Header/Header";
 import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
-import React from "react";
+import React, { useState, useEffect } from "react";
 import WebFont from 'webfontloader';
 import Footer from "./components/layout/Footer/Footer";
 import Home from "./components/Home/Home";
@@ -22,11 +22,25 @@ import ResetPassword from "./components/User/ResetPassword";
 import Cart from "./components/Cart/Cart"
 import Shipping from "./components/Cart/Shipping.jsx"
 import ConfirmOrder from "./components/Cart/ConfirmOrder"
+import Payment from "./components/Cart/Payment"
+import axios from 'axios';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from "@stripe/stripe-js";
+
 
 function App() {
 
-  const {isAuthenticated, user} = useSelector(state=>state.user)
-  React.useEffect(() => {
+  const {isAuthenticated, user} = useSelector((state)=>state.user)
+
+  const [stripeApiKey, setStripeApiKey] = useState("");
+
+  async function getStripeApiKey() {
+    const {data} = await axios.get("/api/v1/stripeapikey");
+
+    setStripeApiKey(data.stripeApiKey)
+  }
+
+ useEffect(() => {
 
     WebFont.load({
       google:{
@@ -35,6 +49,8 @@ function App() {
     });
 
     store.dispatch(loadUser())
+
+    getStripeApiKey()
   }, []);
   
   return (
@@ -61,6 +77,9 @@ function App() {
          <Route path="/shipping" element={<Shipping/>}/>
         <Route element={<ProtectedRoute/>}/>
          <Route path="/order/confirm" element={<ConfirmOrder/>}/>
+
+         <Route element={<ProtectedRoute/>}/>
+          <Route  path="/process/payment" element={ <Elements stripe={loadStripe(stripeApiKey)}><Payment/></Elements>}/>
       </Routes>
     <Footer/>
     </Router>

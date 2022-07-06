@@ -24,6 +24,7 @@
     "mongoose-validation-error-message-handler": "^1.2.5",
     "nodemailer": "^6.7.5",
     "nodemon": "^2.0.16",
+    "stripe": "^9.11.0",
     "validator": "^13.7.0"
   }
 }
