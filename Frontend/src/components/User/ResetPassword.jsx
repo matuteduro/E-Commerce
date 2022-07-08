@@ -30,7 +30,7 @@ const ResetPassword = ({match}) => {
       myForm.set("password", password);
       myForm.set("confirmPassword", confirmPassword);
   
-      dispatch(resetPassword(match.params.token, myForm))
+      dispatch(resetPassword(match?.params?.token, myForm))
     };
   
   

@@ -15,7 +15,7 @@ import { useNavigate } from "react-router-dom";
 const Payment = ({}) => {
 
   const orderInfo = JSON.parse(sessionStorage.getItem("orderInfo"));
-  
+
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const stripe = useStripe();

@@ -29,28 +29,16 @@ import { loadStripe } from "@stripe/stripe-js";
 
 
 function App() {
+  const { isAuthenticated, user } = useSelector((state) => state.user);
 
-  const {isAuthenticated, user} = useSelector((state)=>state.user)
+  const options = {
+    // passing the client secret obtained from the server
+    clientSecret: '{{CLIENT_SECRET}}',
+  };
+  const stripePromise = loadStripe("pk_test_51L8Y0MDdyp9PYD2aKshfHc4dAcJ1P5ccm1RLAbC1afNLeQuc7HMdjCoEgMpJ8qc9vopvoQnS5jTyEQU78gaTrBwo00cxdpRkeo"); 
 
-  const [stripeApiKey, setStripeApiKey] = useState("");
-
-  async function getStripeApiKey() {
-    const {data} = await axios.get("/api/v1/stripeapikey");
-
-    setStripeApiKey(data.stripeApiKey)
-  }
-
- useEffect(() => {
-
-    WebFont.load({
-      google:{
-        families: [ "Droid Sans", "Chilanka"],
-      },
-    });
-
-    store.dispatch(loadUser())
-
-    getStripeApiKey()
+  useEffect(() => {
+    store.dispatch(loadUser());
   }, []);
   
   return (
@@ -79,7 +67,7 @@ function App() {
          <Route path="/order/confirm" element={<ConfirmOrder/>}/>
 
          <Route element={<ProtectedRoute/>}/>
-          <Route  path="/process/payment" element={ <Elements stripe={loadStripe(stripeApiKey)}><Payment/></Elements>}/>
+          <Route  path="/process/payment" element={ <Elements stripe={stripePromise} options={options}><Payment/></Elements>}/>
       </Routes>
     <Footer/>
     </Router>
