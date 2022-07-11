@@ -11,6 +11,8 @@ import CreditCardIcon from '@mui/icons-material/CreditCard';
 import EventIcon from '@mui/icons-material/Event';
 import VpnKeyIcon from '@mui/icons-material/VpnKey';
 import { useNavigate } from "react-router-dom";
+import { createOrder, clearErrors } from "../../actions/orderAction";
+
 
 const Payment = ({}) => {
 
@@ -25,23 +27,40 @@ const Payment = ({}) => {
 
   const {shippingInfo, cartItems} = useSelector((state) => state.cart);
   const {user} = useSelector((state) => state.user);
+  const { error } = useSelector((state) => state.newOrder);
+
+
 
   const paymentData = {
     amount: Math.round(orderInfo.totalPrice * 100),
   }
 
+  const order = {
+    shippingInfo,
+    orderItems: cartItems,
+    itemsPrice: orderInfo.subtotal,
+    taxPrice: orderInfo.tax,
+    shippingPrice: orderInfo.shippingCharges,
+    totalPrice: orderInfo.totalPrice,
+  };
+
+
   const submitHandler = async (e) => {
-     e.prevent.Default();
+     e.preventDefault();
 
      payBtn.current.disabled = true;
 
      try {
       const config = {
         headers: {
-          "Content-Type": "aplication/json",
+          "Content-Type": "application/json",
         }
       };
-      const {data} = await axios.post("/api/v1/payment/process", paymentData, config);
+      const {data} = await axios.post(
+        "/api/v1/payment/process", 
+        paymentData, 
+        config
+        );
 
       const client_secret = data.client_secret;
 
@@ -59,9 +78,9 @@ const Payment = ({}) => {
               state: shippingInfo.state,
               postal_code: shippingInfo.pinCode,
               country: shippingInfo.country,
-            }
-          }
-        }
+            },
+          },
+        },
       });
 
       if (result.error) {
@@ -70,6 +89,11 @@ const Payment = ({}) => {
         alert.error(result.error.message);
       } else {
         if (result.paymentIntent.status === "succeeded") {
+          order.paymentInfo = {
+            id: result.paymentIntent.id,
+            status: result.paymentIntent.status,
+          };
+          dispatch(createOrder(order));
           navigate("/success");
         } else {
           alert.error("There's some issue while processing payment ");
@@ -77,9 +101,15 @@ const Payment = ({}) => {
       }
      } catch (error) {
       payBtn.current.disabled = false;
-      alert.error(error.response.data.message)
+      alert.error(error.response.data.message);
      }
   };
+  useEffect(() => {
+    if (error) {
+      alert.error(error);
+      dispatch(clearErrors());
+    }
+  }, [dispatch, error, alert]);
   return (
     <Fragment>
       <MetaData title="Payment" />

@@ -25,26 +25,29 @@ import ConfirmOrder from "./components/Cart/ConfirmOrder"
 import Payment from "./components/Cart/Payment"
 import axios from 'axios';
 import { Elements } from '@stripe/react-stripe-js';
-import { loadStripe } from "@stripe/stripe-js";
+import OrderSuccess from "./components/Cart/OrderSuccess"
+import StripeContainer from './components/Cart/StripeContainer';
 
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
 
-  const options = {
-    // passing the client secret obtained from the server
-    clientSecret: '{{CLIENT_SECRET}}',
-  };
-  const stripePromise = loadStripe("pk_test_51L8Y0MDdyp9PYD2aKshfHc4dAcJ1P5ccm1RLAbC1afNLeQuc7HMdjCoEgMpJ8qc9vopvoQnS5jTyEQU78gaTrBwo00cxdpRkeo"); 
 
   useEffect(() => {
+    WebFont.load({
+      google: {
+        families: ["Roboto", "Droid Sans", "Chilanka"],
+      },
+    });
     store.dispatch(loadUser());
+
   }, []);
-  
+
   return (
     <Router>
       <Header/>
       {isAuthenticated && <UserOptions user={user} />}
+      
       <Routes>
         <Route path="/" element={<Home/>}/>
         <Route path="/product/:id" element={<ProductDetails/>}/>
@@ -67,7 +70,9 @@ function App() {
          <Route path="/order/confirm" element={<ConfirmOrder/>}/>
 
          <Route element={<ProtectedRoute/>}/>
-          <Route  path="/process/payment" element={ <Elements stripe={stripePromise} options={options}><Payment/></Elements>}/>
+          <Route  path="/process/payment" element={<StripeContainer/>}/>
+        <Route element={<ProtectedRoute/>}/>
+        <Route path="/success" element={<OrderSuccess/>}/>
       </Routes>
     <Footer/>
     </Router>
