@@ -6,6 +6,7 @@
     "@blaumaus/react-alert": "^7.0.5",
     "@mui/icons-material": "^5.8.4",
     "@mui/material": "^5.8.5",
+    "@mui/x-data-grid": "^5.13.0",
     "@reduxjs/toolkit": "^1.8.2",
     "@stripe/react-stripe-js": "^1.9.0",
     "@stripe/stripe-js": "^1.32.0",

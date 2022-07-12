@@ -27,7 +27,7 @@ import axios from 'axios';
 import { Elements } from '@stripe/react-stripe-js';
 import OrderSuccess from "./components/Cart/OrderSuccess"
 import StripeContainer from './components/Cart/StripeContainer';
-
+import MyOrders from './components/Order/MyOrders'
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -68,11 +68,12 @@ function App() {
          <Route path="/shipping" element={<Shipping/>}/>
         <Route element={<ProtectedRoute/>}/>
          <Route path="/order/confirm" element={<ConfirmOrder/>}/>
-
          <Route element={<ProtectedRoute/>}/>
           <Route  path="/process/payment" element={<StripeContainer/>}/>
         <Route element={<ProtectedRoute/>}/>
         <Route path="/success" element={<OrderSuccess/>}/>
+        <Route element={<ProtectedRoute/>}/>
+        <Route path="/orders" element={<MyOrders/>}/>
       </Routes>
     <Footer/>
     </Router>
