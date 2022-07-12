@@ -28,6 +28,7 @@ import { Elements } from '@stripe/react-stripe-js';
 import OrderSuccess from "./components/Cart/OrderSuccess"
 import StripeContainer from './components/Cart/StripeContainer';
 import MyOrders from './components/Order/MyOrders'
+import OrderDetails from './components/Order/OrderDetails'
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -74,6 +75,8 @@ function App() {
         <Route path="/success" element={<OrderSuccess/>}/>
         <Route element={<ProtectedRoute/>}/>
         <Route path="/orders" element={<MyOrders/>}/>
+        <Route element={<ProtectedRoute/>}/>
+        <Route path="/order/:id" element={<OrderDetails/>}/>
       </Routes>
     <Footer/>
     </Router>

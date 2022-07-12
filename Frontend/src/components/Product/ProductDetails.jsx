@@ -97,7 +97,7 @@ return (
                     <input readOnly type="number" value={quantity}/> 
                     <button onClick={increaseQuantity}>+</button>
                     </div>
-                    <button onClick={addToCartHandler}>Add to Cart</button>
+                    <button disabled={product.stock < 1?true:false} onClick={addToCartHandler}>Add to Cart</button>
                 </div>   
                  <p>
                     Status
