@@ -4,7 +4,6 @@ import "./ProductDetails.css";
 import {useSelector, useDispatch} from "react-redux";
 import { clearErrors, getProductDetails, newReview } from '../../actions/productAction';
 import { useParams } from 'react-router-dom';
-import ReactStars from "react-rating-stars-component";
 import ReviewCard from "./ReviewCard";
 import Loader from "../layout/Loader/Loader"
 import {useAlert} from "@blaumaus/react-alert"
@@ -18,7 +17,7 @@ import { NEW_REVIEW_RESET } from "../../constants/productConstants";
 
 
 
-const ProductDetails = ({}) => {
+const ProductDetails = () => {
     const {id} = useParams();
     const dispatch = useDispatch();
     const alert = useAlert();
