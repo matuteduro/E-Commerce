@@ -22,13 +22,11 @@ import ResetPassword from "./components/User/ResetPassword";
 import Cart from "./components/Cart/Cart"
 import Shipping from "./components/Cart/Shipping.jsx"
 import ConfirmOrder from "./components/Cart/ConfirmOrder"
-import Payment from "./components/Cart/Payment"
-import axios from 'axios';
-import { Elements } from '@stripe/react-stripe-js';
 import OrderSuccess from "./components/Cart/OrderSuccess"
 import StripeContainer from './components/Cart/StripeContainer';
 import MyOrders from './components/Order/MyOrders'
 import OrderDetails from './components/Order/OrderDetails'
+import Dashboard from "./components/Admin/Dashboard"
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -77,6 +75,8 @@ function App() {
         <Route path="/orders" element={<MyOrders/>}/>
         <Route element={<ProtectedRoute/>}/>
         <Route path="/order/:id" element={<OrderDetails/>}/>
+        <Route element={<ProtectedRoute/>}/>
+        <Route path="/admin/dashboard" element={<Dashboard/>}/>
       </Routes>
     <Footer/>
     </Router>
