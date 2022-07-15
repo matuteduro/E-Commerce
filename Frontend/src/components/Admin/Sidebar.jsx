@@ -23,13 +23,13 @@ const Sidebar = () => {
             <DashboardIcon /> Dashboard
           </p>
         </Link>
-        <Link to="/">
+        <Link to="/admin/products">
           <TreeView
             defaultCollapseIcon={<ExpandMoreIcon />}
             defaultExpandIcon={<ImportExportIcon />}
           >
             <TreeItem nodeId="1" label="Products">
-              <Link to="/admin/products">
+              <Link to="/admin/product">
                 <TreeItem nodeId="2" label="All" icon={<PostAddIcon />} />
               </Link>
   

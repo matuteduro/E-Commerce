@@ -27,6 +27,7 @@ import StripeContainer from './components/Cart/StripeContainer';
 import MyOrders from './components/Order/MyOrders'
 import OrderDetails from './components/Order/OrderDetails'
 import Dashboard from "./components/Admin/Dashboard"
+import ProductList from "./components/Admin/ProductList"
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -76,7 +77,9 @@ function App() {
         <Route element={<ProtectedRoute/>}/>
         <Route path="/order/:id" element={<OrderDetails/>}/>
         <Route element={<ProtectedRoute/>}/>
-        <Route path="/admin/dashboard" element={<Dashboard/>}/>
+        <Route isAdmin={true} path="/admin/dashboard" element={<Dashboard/>}/>
+        <Route element={<ProtectedRoute/>}/>
+        <Route isAdmin={true} path="/admin/products" element={<ProductList/>}/>
       </Routes>
     <Footer/>
     </Router>
