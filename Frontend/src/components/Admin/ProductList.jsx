@@ -83,7 +83,7 @@ const ProductList = () => {
     const rows = [];
   
     products &&
-      products?.forEach((item) => {
+      products.forEach((item) => {
         rows.push({
           id: item._id,
           stock: item.Stock,
@@ -104,7 +104,6 @@ const ProductList = () => {
             <DataGrid
               rows={rows}
               columns={columns}
-              pageSize={10}
               disableSelectionOnClick
               className="productListTable"
               autoHeight
