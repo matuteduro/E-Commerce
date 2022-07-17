@@ -36,7 +36,7 @@ const Dashboard = () => {
         label: "TOTAL AMOUNT",
         backgroundColor: ["tomato"],
         hoverBackgroundColor: ["rgb(197, 72, 49)"],
-        data: [outOfStock, products?.length - outOfStock],
+        data: [0,4000],
       },
     ],
   };
@@ -47,7 +47,7 @@ const Dashboard = () => {
       {
         backgroundColor: ["#00A6B4", "#6800B4"],
         hoverBackgroundColor: ["#4B5000", "#35014F"],
-        data: [2,10],
+        data: [outOfStock, products?.length - outOfStock],
       },
     ],
   };
