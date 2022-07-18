@@ -22,14 +22,29 @@ const ProductList = () => {
   
     const {error, products } = useSelector((state) => state.products);
 
+    const {error:deleteError,isDeleted} = useSelector(state=>state.product)
+
+    const deleteProductHandler = (id) => {
+      dispatch(deleteProduct(id));
+    }
+
     useEffect(()=> {
       if (error){
         alert.error(error);
         dispatch(clearErrors())
       }
+      if (deleteError){
+        alert.error(deleteError);
+        dispatch(clearErrors())
+      }
+      if (isDeleted) {
+        alert.success("Product Deleted Succesfully");
+        navigate("/admin/dashboard");
+        dispatch({ type: DELETE_PRODUCT_RESET})
+      }
 
       dispatch(getAdminProduct())
-    }, [dispatch, alert,error])
+    }, [dispatch, alert,error, navigate, deleteError, isDeleted])
   
    
     const columns = [
@@ -71,7 +86,7 @@ const ProductList = () => {
                 <EditIcon />
               </Link>
   
-              <Button              >
+              <Button onClick={()=>deleteProductHandler(params.getValue(params.id, "id"))}>
                 <DeleteIcon />
               </Button>
             </Fragment>

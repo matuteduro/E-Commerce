@@ -52,7 +52,7 @@ const NewProduct = () => {
             navigate("/admin/dashboard");
             dispatch({ type: NEW_PRODUCT_RESET });
         }
-    }, [dispatch, alert, error, success]);
+    }, [dispatch, alert, error, success, navigate]);
 
 
     const createProductSubmitHandler = (e) => {
@@ -101,6 +101,7 @@ const NewProduct = () => {
                         <form
                             className="createProductForm"
                             encType="multipart/form-data"
+                            onSubmit={createProductSubmitHandler}
                         >
                             <h1>Create Product</h1>
 

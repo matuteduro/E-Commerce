@@ -2,18 +2,41 @@ const Product = require ("../models/productModel");
 const ErrorHander = require("../utils/errrorhander");
 const catchAsyncErrors = require("../middlewares/catchAsyncErrors")
 const ApiFeatures = require("../utils/apifeatures")
+const cloudinary = require("cloudinary");
+
 
 // Create Product -- Admin
-exports.createProduct = catchAsyncErrors(async(req,res,next) =>{
+exports.createProduct = catchAsyncErrors(async (req, res, next) => {
+  let images = [];
 
-    req.body.user = req.user.id;
+  if (typeof req.body.images === "string") {
+    images.push(req.body.images);
+  } else {
+    images = req.body.images;
+  }
 
-    const product = await Product.create(req.body);
+  const imagesLinks = [];
 
-    res.status(201).json({
-        success: true,
-        product
-    })
+  for (let i = 0; i < images.length; i++) {
+    const result = await cloudinary.v2.uploader.upload(images[i], {
+      folder: "products",
+    });
+
+    imagesLinks.push({
+      public_id: result.public_id,
+      url: result.secure_url,
+    });
+  }
+
+  req.body.images = imagesLinks;
+  req.body.user = req.user.id;
+
+  const product = await Product.create(req.body);
+
+  res.status(201).json({
+    success: true,
+    product,
+  });
 });
 
 // Get All Products
@@ -88,20 +111,24 @@ exports.updateProduct = catchAsyncErrors(async(req,res,next) =>{
 
 // Delete Product
 
-exports.deleteProduct = catchAsyncErrors(async(req,res,next) =>{
+exports.deleteProduct = catchAsyncErrors(async (req, res, next) => {
+  const product = await Product.findById(req.params.id);
 
-    const product = await Product.findById(req.params.id);
+  if (!product) {
+    return next(new ErrorHander("Product not found", 404));
+  }
 
-    if(!product){
-        return next(new ErrorHander("Product Not Found", 404))
-    }
-    await product.remove();
+  // Deleting Images From Cloudinary
+  for (let i = 0; i < product.images.length; i++) {
+    await cloudinary.v2.uploader.destroy(product.images[i].public_id);
+  }
 
-    res.status(200).json({
-        sucess: true,
-        message:"Product Delete Successfull"
-    })
+  await product.remove();
 
+  res.status(200).json({
+    success: true,
+    message: "Product Delete Successfully",
+  });
 });
 
 // Create New Review or Update the review
