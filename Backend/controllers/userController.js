@@ -1,5 +1,5 @@
 const ErrorHander = require("../utils/errrorhander");
-const catchAsyncErrors = require("../middlewares/catchAsyncErrors")
+const catchAsyncErrors = require("../middlewares/catchAsyncErrors");
 const User = require("../models/userModel");
 const sendToken = require("../utils/jwtToken");
 const sendEmail = require("../utils/sendEmail");
@@ -7,36 +7,27 @@ const crypto = require("crypto");
 const cloudinary = require("cloudinary");
 
 // Register a User
+exports.registerUser = catchAsyncErrors(async (req, res, next) => {
+  const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
+    folder: "avatars",
+    width: 150,
+    crop: "scale",
+  });
 
-exports.registerUser = catchAsyncErrors( async(req,res,next) => {
-    
-  
-    const myCloud = await cloudinary.v2.uploader.upload(req.body.avatar, {
-      folder: "avatars",
-      width: 150,
-      crop: "scale",
-  })
-    const {name,email,password} = req.body;
+  const { name, email, password } = req.body;
 
+  const user = await User.create({
+    name,
+    email,
+    password,
+    avatar: {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    },
+  });
 
-    const user = await User.create({
-        name,
-        email,
-        password,
-        avatar:{
-            public_id:myCloud.public_id,
-            url:myCloud.secure_url,
-        },
-    });
-
-    const token = user.getJWTToken();
-
-    res.status(201).json({
-        success: true,
-        token,
-    })
-})
-
+  sendToken(user, 201, res);
+});
 
 // Login User
 exports.loginUser = catchAsyncErrors(async (req, res, next) => {
@@ -64,19 +55,17 @@ exports.loginUser = catchAsyncErrors(async (req, res, next) => {
 });
 
 // Logout User
+exports.logout = catchAsyncErrors(async (req, res, next) => {
+  res.cookie("token", null, {
+    expires: new Date(Date.now()),
+    httpOnly: true,
+  });
 
-exports.logout = catchAsyncErrors(async(req,res,next)=>{
-
-    res.cookie("token", null,{
-        expires: new Date(Date.now()),
-        httpOnly: true,
-    });
-
-    res.status(200).json({
-        success: true,
-        message: "Logged Out",
-    })
-})
+  res.status(200).json({
+    success: true,
+    message: "Logged Out",
+  });
+});
 
 // Forgot Password
 exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
@@ -118,7 +107,6 @@ exports.forgotPassword = catchAsyncErrors(async (req, res, next) => {
   }
 });
 
-
 // Reset Password
 exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
   // creating token hash
@@ -153,7 +141,6 @@ exports.resetPassword = catchAsyncErrors(async (req, res, next) => {
 
   sendToken(user, 200, res);
 });
-
 
 // Get User Detail
 exports.getUserDetails = catchAsyncErrors(async (req, res, next) => {
@@ -223,7 +210,6 @@ exports.updateProfile = catchAsyncErrors(async (req, res, next) => {
   });
 });
 
-
 // Get all users(admin)
 exports.getAllUser = catchAsyncErrors(async (req, res, next) => {
   const users = await User.find();
@@ -258,7 +244,7 @@ exports.updateUserRole = catchAsyncErrors(async (req, res, next) => {
     role: req.body.role,
   };
 
-  const user = await User.findByIdAndUpdate(req.params.id, newUserData, {
+  await User.findByIdAndUpdate(req.params.id, newUserData, {
     new: true,
     runValidators: true,
     useFindAndModify: false,
@@ -290,4 +276,3 @@ exports.deleteUser = catchAsyncErrors(async (req, res, next) => {
     message: "User Deleted Successfully",
   });
 });
-
