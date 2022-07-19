@@ -19,16 +19,18 @@ import UpdateProfile from "./components/User/UpdateProfile";
 import UpdatePassword from "./components/User/UpdatePassword";
 import ForgotPassword from './components/User/ForgotPassword';
 import ResetPassword from "./components/User/ResetPassword";
-import Cart from "./components/Cart/Cart"
-import Shipping from "./components/Cart/Shipping.jsx"
-import ConfirmOrder from "./components/Cart/ConfirmOrder"
-import OrderSuccess from "./components/Cart/OrderSuccess"
+import Cart from "./components/Cart/Cart";
+import Shipping from "./components/Cart/Shipping.jsx";
+import ConfirmOrder from "./components/Cart/ConfirmOrder";
+import OrderSuccess from "./components/Cart/OrderSuccess";
 import StripeContainer from './components/Cart/StripeContainer';
-import MyOrders from './components/Order/MyOrders'
-import OrderDetails from './components/Order/OrderDetails'
-import Dashboard from "./components/Admin/Dashboard"
-import ProductList from "./components/Admin/ProductList"
+import MyOrders from './components/Order/MyOrders';
+import OrderDetails from './components/Order/OrderDetails';
+import Dashboard from "./components/Admin/Dashboard";
+import ProductList from "./components/Admin/ProductList";
 import NewProduct from './components/Admin/NewProduct';
+import UpdateProduct from "./components/Admin/UpdateProduct";
+import OrderList from "./components/Admin/OrderList";
 
 function App() {
   const { isAuthenticated, user } = useSelector((state) => state.user);
@@ -83,6 +85,11 @@ function App() {
         <Route isAdmin={true} path="/admin/products" element={<ProductList/>}/>
         <Route element={<ProtectedRoute/>}/>
         <Route isAdmin={true} path="/admin/product" element={<NewProduct/>}/>
+        <Route element={<ProtectedRoute/>}/>
+        <Route isAdmin={true} path="/admin/product/:id" element={<UpdateProduct/>}/>
+        <Route element={<ProtectedRoute/>}/>
+        <Route isAdmin={true} path="/admin/orders" element={<OrderList/>}/>
+
       </Routes>
     <Footer/>
     </Router>
