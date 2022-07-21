@@ -3,9 +3,12 @@ const app = express ();
 const cookieParser = require("cookie-parser");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
-const dotenv = require("dotenv");
+const path = require("path")
 
-dotenv.config({ path: "backend/config/settings.env"})
+// Config
+if (process.env.NODE_ENV !== "PRODUCTION") {
+    require("dotenv").config({ path: "backend/config/settings.env" });
+  }
 
 const ErrorMiddleware = require("./middlewares/error")
 
@@ -25,6 +28,12 @@ app.use("/api/v1", product);
 app.use("/api/v1", user);
 app.use("/api/v1", order);
 app.use("/api/v1", payment);
+
+app.use(express.static(path.join(__dirname, "../Frontend/build")));
+
+app.get("*",(req,res) => {
+    res.sendFile(path.resolve(__dirname, "../Frontend/build/index.html"))
+})
 
 //Middleware for Errors
 app.use(ErrorMiddleware);
