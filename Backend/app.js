@@ -7,8 +7,8 @@ const path = require("path")
 
 // Config
 if (process.env.NODE_ENV !== "PRODUCTION") {
-    require("dotenv").config({ path: "backend/config/settings.env" });
-  }
+  require("dotenv").config({ path: "backend/config/settings.env" });
+}
 
 const ErrorMiddleware = require("./middlewares/error")
 
