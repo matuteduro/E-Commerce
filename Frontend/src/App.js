@@ -77,7 +77,7 @@ function App() {
           <Route path="/password/update" element={<UpdatePassword/>}/>
           <Route path="/shipping" element={<Shipping/>}/>
           <Route path="/order/confirm" element={<ConfirmOrder/>}/>
-          <Route  path="/process/payment" element={<StripeContainer/>}/>
+          <Route path="/process/payment" element={<StripeContainer/>}/>
           <Route path="/success" element={<OrderSuccess/>}/>
           <Route path="/orders" element={<MyOrders/>}/>
           <Route path="/order/:id" element={<OrderDetails/>}/>
